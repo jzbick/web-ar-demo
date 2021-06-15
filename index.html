@@ -10,19 +10,28 @@
 <body style='margin : 0; overflow: hidden;'>
 <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
 <a-scene
+        id="scene"
         arjs='debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'
         embedded
         vr-mode-ui="enabled: false;"
 >
 
     <a-assets>
-        <img id="image" src="holzmarkt-hmh-bild-6-1965.jpg"/>
+        <img id="image1" src="images/holzmarkt-hmh-bild-1-1930.jpg"/>
+        <img id="image2" src="images/holzmarkt-hmh-bild-2-1933.jpg"/>
+        <img id="image3" src="images/holzmarkt-hmh-bild-3-1939.jpg"/>
+        <img id="image4" src="images/holzmarkt-hmh-bild-4-1943.jpg"/>
+        <img id="image5" src="images/holzmarkt-hmh-bild-5-1963.jpg"/>
+        <img id="image6" src="images/holzmarkt-hmh-bild-6-1965.jpg"/>
+        <img id="image7" src="images/holzmarkt-hmh-bild-7-2019.jpg"/>
     </a-assets>
 
     <a-marker type="barcode" value="0">
         <a-entity
+                id="entity"
                 geometry="primitive: plane; height: 1; width: 1;"
-                material="src: #image; shader: flat;"
+                material="src: #image1; shader: flat;"
+                rotation="270 0 0"
         >
         </a-entity>
     </a-marker>
@@ -30,5 +39,12 @@
     <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
     <a-entity camera></a-entity>
 </a-scene>
+<script>
+    let number = 0
+    document.getElementById("scene").addEventListener("click", () => {
+        document.getElementById("entity").setAttribute("material", `src: #image${(number % 7) + 1}; shader: flat;`)
+        number++;
+    })
+</script>
 </body>
 </html>
